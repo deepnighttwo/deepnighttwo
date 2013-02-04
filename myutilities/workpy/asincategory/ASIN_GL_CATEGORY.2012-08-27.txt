@@ -1,0 +1,30 @@
+ASIN	iog	gl	max(d_mp_asins.category_code)	max(d_mp_asins.subcategory_code
+0000000000	1	14	Entertainment	Entertainment/Music
+0000000019	1	14	Business and Investing	Business and Investing/Management and Leadership
+0000000388	1	14	Science	Science/Biological Sciences
+000000068X	1	14	Science	Science/Biological Sciences
+0000006335	1	14		
+0000006351	1	14		
+0000006459	1	14		
+0000006491	1	14		
+0000013862	1	14	Religion and Spirituality	Religion and Spirituality/Christianity
+0000023930	2	14		
+0000049859	2	14		
+0001000152	2	14	Reference	Reference/Dictionaries and Thesauruses
+0001000306	2	14	Literature and Fiction	Literature and Fiction/Contemporary
+000100039X	2	14	Literature and Fiction	Literature and Fiction/Poetry
+0001000446	2	14		
+000105001X	1	14	Literature and Fiction	Literature and Fiction/Contemporary
+0001052136	1	14	Literature and Fiction	Literature and Fiction/Classics
+0001052438	1	14	Literature and Fiction	Literature and Fiction/Classics
+0001056506	1	14	Entertainment	Entertainment/Humor
+000105709X	1	14	Entertainment	Entertainment/Humor
+0001057138	1	14	Entertainment	Entertainment/Music
+0001057243	1	14	Entertainment	Entertainment/Humor
+0001057286	1	14	Entertainment	Entertainment/Humor
+0001057294	1	14	Entertainment	Entertainment/Humor
+0001057308	1	14	Entertainment	Entertainment/Humor
+0001057375	1	14	Entertainment	Entertainment/Humor
+0001057383	1	14	Entertainment	Entertainment/Humor
+0001057391	1	14	Entertainment	Entertainment/Humor
+0001373293	2	27		

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension-point id="openFolderExtraType" name="com.deepnighttwo.tools.openfolder.extratype" schema="schema/openFolderExtraType.exsd"/>
+
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            name="Utilities"
+            id="com.deepnighttwo.tools.openfolder.commands.category">
+      </category>
+      <command
+            name="Open Folder"
+            categoryId="com.deepnighttwo.tools.openfolder.commands.category"
+            id="com.deepnighttwo.tools.openfolder.commands.sampleCommand">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            commandId="com.deepnighttwo.tools.openfolder.commands.sampleCommand"
+            class="com.deepnighttwo.tools.openfolder.handlers.OpenFolderHandler">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="com.deepnighttwo.tools.openfolder.commands.sampleCommand"
+            contextId="org.eclipse.ui.contexts.window"
+            sequence="M1+`"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
+      </key>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+         <toolbar
+               id="com.deepnighttwo.tools.openfolder.toolbars.sampleToolbar">
+            <command
+                  commandId="com.deepnighttwo.tools.openfolder.commands.sampleCommand"
+                  icon="icons/simple.gif"
+                  tooltip="Open folder"
+                  id="com.deepnighttwo.tools.openfolder.toolbars.sampleCommand">
+            </command>
+         </toolbar>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="popup:org.eclipse.jdt.ui.PackageExplorer?after=additions">
+         <command
+               commandId="com.deepnighttwo.tools.openfolder.commands.sampleCommand"
+               icon="icons/simple.gif"
+               label="Open Folder"
+               style="push">
+         </command>
+      </menuContribution>
+   </extension>
+
+</plugin>

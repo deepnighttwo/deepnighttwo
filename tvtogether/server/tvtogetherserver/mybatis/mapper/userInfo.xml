@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="userInfo">
+
+	<resultMap type="userInfo" id="userInfo">
+		<id property="id" column="id" />
+		<result property="username" column="username" />
+		<result property="userPasword" column="user_password" />
+		<result property="icon" column="icon" />
+		<result property="comments" column="comments" />
+		<result property="favor" column="favor" />
+		<result property="locationX" column="location_x" />
+		<result property="locationY" column="location_y" />
+		<result property="registerTime" column="register_time" />
+		<result property="lastLogin" column="last_login" />
+		<result property="status" column="status" />
+	</resultMap>
+
+	<!-- 插入一条用户数据 -->
+	<insert id="insertUser" parameterType="userInfo">
+	insert into user_info (id, username,user_password,icon,comments,favor,location_x,location_y,register_time,last_login,status)
+	values
+	(#{id},#{userName},#{userPassword},#{icon},#{comments},#{favor},#{locationX},#{locationY},#{registerTime},#{lastLogin},#{status})
+	</insert>
+	
+	<!-- 更新用户数据 -->
+	<update id="updateUser" parameterType="userInfo">
+	update user_info set id = id
+		<if test="userName != null">
+		, username=#{userName}
+		</if>
+		<if test="userPassword != null">
+		, user_password=#{userPassword}
+		</if>
+		<if test="icon != null">
+		, icon=#{icon}
+		</if>
+		<if test="comments != null">
+		, comments=#{comments}
+		</if>
+		<if test="favor != null">
+		, favor=#{favor}
+		</if>
+		<if test="locationX != null">
+		, location_x=#{locationX}
+		</if>
+		<if test="locationY != null">
+		, location_y=#{locationY}
+		</if>
+		<if test="registerTime != null">
+		, register_time=#{registerTime}
+		</if>
+		<if test="lastLogin != null">
+		, last_login=#{lastLogin}
+		</if>
+		<if test="status != null">
+		, status=#{status}
+		</if>
+	where id = #{id}
+	</update>
+
+
+	<!-- 根据用户名和密码登录 -->
+	<select id="login" parameterType="userInfo"  resultType="userInfo" >
+	SELECT id, username,user_password,icon,comments,favor,location_x,location_y,register_time,last_login,status from user_Info
+	where username=#{userName} and user_password=#{userPassword}
+	</select>
+	
+	<!-- 根据用户id选择用户信息 -->
+	<select id="selectUserById" parameterType="string"  resultType="userInfo" >
+	SELECT id, username,user_password,icon,comments,favor,location_x,location_y,register_time,last_login,status from user_Info
+	where id=#{id}
+	</select>
+	
+	<!-- 根据用户名选择用户信息 -->
+	<select id="selectUserByName" parameterType="string"  resultType="userInfo" >
+	SELECT id, username,user_password,icon,comments,favor,location_x,location_y,register_time,last_login,status from user_Info
+	where username=#{userName}
+	</select>
+	
+	
+	<!-- 根据id删除用户信息 -->
+	<delete id="deleteUser" parameterType="string">
+	delete from user_info where id=#{id}
+	</delete>
+
+</mapper>

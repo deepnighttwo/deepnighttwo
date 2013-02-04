@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Ui
+Bundle-SymbolicName: com.deepnighttwo.resourceresolver.ui;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.deepnighttwo.resourceresolver.ui.Activator
+Bundle-Vendor: DeepNightTwo
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Export-Package: com.deepnighttwo.resourceresolver.ui.resolver,
+ com.deepnighttwo.resourceresolver.ui.resolver.data,
+ com.deepnighttwo.resourceresolver.ui.views.utils

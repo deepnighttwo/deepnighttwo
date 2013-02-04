@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Douban Resolver
+Bundle-SymbolicName: com.deepnighttwo.resourceresolver.douban;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.deepnighttwo.resourceresolver.douban.Activator
+Bundle-Vendor: DeepNightTwo
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ com.deepnighttwo.resourceresolver.ui;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy

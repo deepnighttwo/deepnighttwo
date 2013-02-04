@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.ebay.com/marketplace/adcommerce/v1/types"
+	xmlns:tns1="http://www.ebay.com/marketplace/payment/v1/services"
+	attributeFormDefault="unqualified" elementFormDefault="qualified"
+	targetNamespace="http://www.ebay.com/marketplace/adcommerce/v1/types"
+	version="1.0.0">
+
+	<xs:complexType name="ExtensionType">
+		<xs:annotation>
+			<xs:documentation>
+				Documentation goes here
+            </xs:documentation>
+			<xs:appinfo>
+				<typeLibrarySource library="MarketPlaceServiceCommonTypeLibrary"
+					namespace="http://www.ebay.com/marketplace/services"></typeLibrarySource>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="VVVVVVVVVVVVVVVV" type="xs:string"></xs:element>
+			<xs:any maxOccurs="unbounded" minOccurs="0" processContents="lax"></xs:any>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="T2">
+		<xs:annotation>
+			<xs:documentation />
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element maxOccurs="1" minOccurs="0" name="asdfadfasdf"
+				type="xs:string" />
+			<xs:element maxOccurs="1" minOccurs="0" name="eswerwer"
+				type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+
+	<xs:simpleType name="NewTypefdhdfghdgfh">
+		
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Value">
+				<xs:annotation>
+					<xs:documentation>Description</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="asdfasdf">
+				<xs:annotation>
+					<xs:documentation>Description</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="asdfedsfsadf">
+				<xs:annotation>
+					<xs:documentation>Description</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SimpleType">
+		<xs:annotation>
+			<xs:documentation>this is a SimpleType</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string" />
+	</xs:simpleType>
+</xs:schema>
+
+

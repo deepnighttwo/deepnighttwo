@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 全局 -->
+    <string name="app_name">17看电视</string>
+
+    <!-- 登录界面 -->
+    <string name="login_name_lbl">用户名</string>
+    <string name="login_password_lbl">密码</string>
+    <string name="login_reg_cb">使用此用户名密码注册新用户</string>
+    <string name="login_keepLogin_cb">记住用户名密码</string>
+    <string name="login_login_btn">登录</string>
+
+    <!-- 频道列表界面 -->
+    <string name="channel_channelList_title">频道列表</string>
+    <string name="channel_exit">确定</string>
+    <string name="channel_not_exit">取消</string>
+    <string name="channel_exit_title">退出17看电视</string>
+    <string name="channel_exit_msg">确定退出17看电视吗？</string>
+    <string name="channel_loading_msg">正在载入电视频道...</string>
+
+    <!-- 节目列表界面 -->
+    <string name="programme_programmeList_title">节目列表</string>
+    <string name="programme_loading_msg">正在载入频道节目...</string>
+    <string name="programme_comments">评论</string>
+
+    <!-- 测试相关 -->
+    <string name="test_demo">测试页面</string>
+
+</resources>
