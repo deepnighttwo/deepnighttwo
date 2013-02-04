@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
+
+	<security-constraint>
+		<web-resource-collection>
+			<url-pattern>/dataretrieve/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>admin</role-name>
+		</auth-constraint>
+	</security-constraint>
+
+
+	<!-- Listener -->
+	<listener>
+		<listener-class>com.deepnighttwo.aircondition.util.SystemInitializerCaller</listener-class>
+	</listener>
+
+	<servlet>
+		<servlet-name>AirCondition</servlet-name>
+		<servlet-class>com.deepnighttwo.aircondition.servlet.AirConditionServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AirCondition</servlet-name>
+		<url-pattern>/aircondition</url-pattern>
+	</servlet-mapping>
+
+
+
+	<servlet>
+		<servlet-name>AirConditionSumDateRetrieveInitializer</servlet-name>
+		<servlet-class>com.deepnighttwo.aircondition.servlet.AirConditionSumDateRetrieveInitializerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AirConditionSumDateRetrieveInitializer</servlet-name>
+		<url-pattern>/dataretrieve/acsumInitializer</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>ACSumRetrieveTodayData</servlet-name>
+		<servlet-class>com.deepnighttwo.aircondition.servlet.AirConditionSumRetrieveTodayDataServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ACSumRetrieveTodayData</servlet-name>
+		<url-pattern>/dataretrieve/acsumRetrieveTodayData</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>ACSumRetrieveData</servlet-name>
+		<servlet-class>com.deepnighttwo.aircondition.servlet.AirConditionSumRetrieveDataServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ACSumRetrieveData</servlet-name>
+		<url-pattern>/dataretrieve/acsumRetrieveData</url-pattern>
+	</servlet-mapping>
+
+
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+
+
+</web-app>

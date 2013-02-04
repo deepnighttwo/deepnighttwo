@@ -1,0 +1,26 @@
+{
+    "strValue":"here is str value",
+    "nullValue":null,
+    "intvalue":999,
+    "doublevalue":999,
+    "booleanValue":true,
+    "array":[
+        "a1",
+        "a2",
+        true,
+        2,
+        33.3,
+        null,
+        {
+            "innerStr":"here is a inner str",
+            "innerInteger":123456789
+        },
+        [
+            "Hi, found me ?"
+        ]
+    ],
+    "innerOBJ":{
+        "innerStr":"here is a inner str",
+        "innerInteger":123456789
+    }
+}

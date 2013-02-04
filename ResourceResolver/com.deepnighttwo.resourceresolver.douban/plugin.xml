@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="com.deepnighttwo.resourceresolver.ui.resolverprovider">
+      <resolverProvider
+            ResolverClassName="com.deepnighttwo.resourceresolver.douban.resolver.ResourceResolverDouban"
+            resolverID="com.deepnighttwo.resourceresolver.douban.resolverProvider"
+            resolverName="Douban Resolver">
+      </resolverProvider>
+   </extension>
+
+</plugin>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="channel">
+
+	<resultMap type="channel" id="channel">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="comments" column="comments" />
+		<result property="image" column="image" />
+		<result property="status" column="status" />
+		<result property="updateTime" column="update_time" />
+	</resultMap>
+
+	<!-- 插入一条频道数据 -->
+	<insert id="insertChannel" parameterType="channel">
+	insert into channel (id,name,comments,image,status,update_time)
+	values
+	(#{id},#{name},#{comments},#{image},#{status},#{updateTime})
+	</insert>
+	
+	<!-- 更新频道数据 -->
+	<update id="updateChannel" parameterType="channel">
+	update channel set id = id
+		<if test="name != null">
+		,name=#{name}
+		</if>
+		<if test="comments != null">
+		, comments=#{comments}
+		</if>
+		<if test="image != null">
+		, image=#{image}
+		</if>
+		<if test="status != null">
+		, status=#{status}
+		</if>
+		<if test="updateTime != null">
+		, update_time=#{updateTime}
+		</if>
+	where id = #{id}
+	</update>
+
+	<!-- 获取所有频道 -->
+	<select id="selectAllChannels"  resultType="channel" >
+	SELECT id,name,comments,image,status,update_time from channel
+	where status = 'enable'
+	</select>
+	
+	<!-- 删除频道 -->
+	<delete id="deleteChannel">
+	delete from channel where id=#{id}
+	</delete>
+
+</mapper>

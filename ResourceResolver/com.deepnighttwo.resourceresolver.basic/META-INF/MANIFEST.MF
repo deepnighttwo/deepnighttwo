@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: ResourceResolverBasic
+Bundle-SymbolicName: com.deepnighttwo.resourceresolver.basic;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.deepnighttwo.resourceresolver.basic.Activator
+Bundle-Vendor: DeepNightTwo
+Require-Bundle: org.eclipse.core.runtime,
+ com.deepnighttwo.resourceresolver.ui;bundle-version="1.0.0",
+ org.eclipse.swt;bundle-version="3.6.0",
+ org.eclipse.ui;bundle-version="3.6.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy

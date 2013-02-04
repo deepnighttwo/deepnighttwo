@@ -1,0 +1,104 @@
+-1		 Mixed
+0	 gl_unassigned	 Unassigned
+14	 gl_book	 Books
+15	 gl_music	 Music
+18		 Unknown
+20	 gl_gift	 Gifts
+21	 gl_toy	 Toys
+22	 gl_game	 Games
+23	 gl_electronics	 Electronics
+26		 Unknown
+27	 gl_video	 Video
+31	 gl_unknown	
+44	 gl_batteries	 Batteries
+50	 gl_shops	 Shops
+53	 gl_universal_catalog	 Universal
+60	 gl_home_improvement	 Home Improvement
+63	 gl_video_games	 Video Games
+65	 gl_software	 Software
+74	 gl_dvd	 Video DVD
+75	 gl_baby_product	 Baby
+79	 gl_kitchen	 Kitchen
+86	 gl_lawn_and_garden	 Lawn and Garden
+107	 gl_wireless	 Wireless
+111	 gl_ebooks	 Ebook
+114	 gl_photo	 Photo
+121	 gl_drugstore	 Health & Personal Care	 in the US aka OTC - Over The Counter
+123	 gl_slots	 Slots
+125	 gl_catalog_of_the_world	 Catalog of the World
+129	 gl_audible	 Audible
+136	 gl_downloadable_software	 Downloadable Software
+147	 gl_pc	 PC
+153	 gl_magazine	 Magazines
+158	 gl_target	 Target
+160	 gl_target_gift_card	 Target Gift Card
+171	 gl_paper_catalog	 Paper Catalog
+180	 gl_restaurant_menu	 Restaurant Menu
+193	 gl_apparel	 Apparel
+194	 gl_beauty	 Beauty
+195	 gl_food_and_beverage	 Food and Beverage
+196	 gl_furniture	 Furniture
+197	 gl_jewelry	 Jewelry
+198	 gl_luggage	 Luggage
+199	 gl_pet_products	 Pet Products
+200	 gl_sports	 Sports
+201	 gl_home	 Home
+219	 gl_cadillac	 Cadillac
+224	 gl_pets	
+225	 gl_food	
+226	 gl_media	 Media
+228	 gl_gift_card	 Gift Card
+229	 gl_office_product	 Office Products
+234	 gl_travel_store	 Travel Store
+236	 gl_sdp_misc	 Misc SDP
+241	 gl_watch	 Watches
+246	 gl_loose_stones	 Loose Stones
+251	 gl_gourmet	 Gourmet
+256	 gl_local_directories	 Local Directories
+258	 gl_posters	 Posters
+259	 gl_sports_memorabilia	 Sports Memorabilia
+260	 gl_school_supplies	 School Supplies
+261	 gl_art_craft_supplies	 Art and Craft Supplies
+262	 gl_medical_lab_supplies	 Medical Laboratory Supplies
+263	 gl_automotive	 Automotive
+264	 gl_art	 Art
+265	 gl_major_appliances	 Major Appliances
+266	 gl_antiques	 Antiques
+267	 gl_musical_instruments	 Musical Instruments
+279	 gl_gift_certificates	 Gift_Certificates
+293	 gl_tires	 Tires
+297	 gl_digital_short_lit	 Digital_Short_Lit
+298	 gl_digital_documents	 Kindle Active Content (KDK)
+304	 gl_philanthropy	 Philanthropy
+307	 gl_authority_non_buyable	 Authority_Non_Buyable
+309	gl_shoes	 Shoes
+311	 gl_free_gift_card	 Free_Gift_Card
+313	 gl_webservices	 Webservices
+316	 gl_library_services	 Library_Services
+318	 gl_digital_video_download	 Digital_Video_Download
+325	 gl_grocery	 Grocery
+327		 Digital_Music_Service
+328	 gl_biss	 Biss
+334	 gl_digital_book_service	 Digital_Book_Service
+336	 gl_electronic_gift_certificate	 Nba_Gift_Card
+340	 gl_digital_music_purchase	 Digital_Music_Purchase
+349	 gl_digital_text	 Digital_Text	 Kindle device (Adds opt out)
+350	 gl_digital_periodicals	 Digital_Periodicals
+351	 gl_digital_ebook_purchase	 Digital_Ebook_Purchase	 Kindle eBooks
+353		 Wireless_Accessory
+354		 Wireless_Prepaid_Phone
+355		 Wireless_Service_Plan
+356	 gl_data_activity_plans	 Data_Activity_Plans
+360	 gl_advertising	 Advertising
+362		 Video_Game_Hardware
+364	 gl_personal_care_appliances	 Personal_Care_Appliances
+366	 gl_digital_software	 Digital_Software
+367	 gl_digital_video_games	 Digital_Video_Games
+370	 gl_wine	 Wine
+396	 gl_consumables_physical_gift_cards	 Consumables gift cards
+400	gl_digital_accessories	Digital Accessories	Kindle Accessories
+405	gl_mobile_apps	Venezia/Android Apps
+416	gl_deal_sourcer		Amazon Local
+417	gl_amazon_sourced		Amazon Local
+421	gl_camera	Camera	Split from Electronics
+422	gl_mobile_electronics	Mobile Electronics	Split from Electronics

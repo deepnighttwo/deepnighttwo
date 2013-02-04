@@ -1,0 +1,10 @@
+<!-- Indices written at Sun, 31 Jul 2011 18:44:38 UTC -->
+
+<datastore-indexes>
+
+    <!-- Used 1 time in query history -->
+    <datastore-index kind="AirConditionSum" ancestor="false" source="auto">
+        <property name="__key__" direction="desc"/>
+    </datastore-index>
+
+</datastore-indexes>

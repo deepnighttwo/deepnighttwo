@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension-point id="resolverprovider" name="ResolverProvider" schema="schema/resolverprovider.exsd"/>
+
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            name="Resource Resolver"
+            id="com.deepnighttwo.resourceresolver.ui.view.category">
+      </category>
+      <view
+            name="Movie Details View"
+            icon="icons/sample.gif"
+            category="com.deepnighttwo.resourceresolver.ui.view.category"
+            class="com.deepnighttwo.resourceresolver.ui.views.ResourceDetailsView"
+            id="com.deepnighttwo.resourceresolver.ui.views.ResourceDetailsView">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.help.contexts">
+      <contexts
+            file="contexts.xml">
+      </contexts>
+   </extension>
+   <extension
+         id="movieresolver"
+         name="movieresolvername"
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="*">
+         <view
+               id="com.deepnighttwo.resourceresolver.ui.views.ResourceDetailsView"
+               minimized="false"
+               relationship="stack"
+               relative="org.eclipse.ui.console.ConsoleView"
+               visible="true">
+         </view>
+      </perspectiveExtension>
+   </extension>
+
+</plugin>

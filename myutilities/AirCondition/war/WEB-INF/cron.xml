@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cronentries>
+	<cron>
+		<url>/dataretrieve/acsumRetrieveTodayData</url>
+		<description>Retrieve data for ACSum everyday</description>
+		<schedule>every 5 minutes from 17:00 to 19:00</schedule>
+		<timezone>Asia/Shanghai</timezone>
+	</cron>
+
+	<cron>
+		<url>/dataretrieve/acsumRetrieveTodayData</url>
+		<description>Retrieve data for ACSum everyday. Do it slow.</description>
+		<schedule>every 30 minutes from 19:00 to 23:59</schedule>
+		<timezone>Asia/Shanghai</timezone>
+	</cron>
+
+</cronentries>
