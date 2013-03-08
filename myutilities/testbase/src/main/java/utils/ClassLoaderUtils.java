@@ -10,6 +10,13 @@ public class ClassLoaderUtils {
             if (cl == null) {
                 cl = ClassLoader.getSystemClassLoader();
             }
+            ClassLoader p = cl;
+            String clPath = "";
+            while (p != null) {
+                clPath += p.toString();
+                p = p.getParent();
+            }
+            System.out.println(clPath);
             URL url = cl.getResource(clz.getName().replace('.', '/') + ".class");
             System.out.println(url.toString());
             return url.toString();
