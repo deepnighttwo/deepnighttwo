@@ -2,3 +2,9 @@
 */bin
 */*/bin
 */*/*/bin
+*/target
+*/*/target
+*/*/*/target
+*/WEB-INF
+*/*/WEB-INF
+*/*/*/WEB-INF
