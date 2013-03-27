@@ -1,1 +1,0 @@
-java -javaagent:xxx.jar='para for premain' mainclass
