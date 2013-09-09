@@ -2,7 +2,6 @@ package cha1;
 
 
 import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.fs.FSDataInputStream;
 import org.apache.hadoop.fs.FSDataOutputStream;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
@@ -21,10 +20,10 @@ public class WriteHDFS {
             conf.addResource("hdfs-site.xml");
             FileSystem fs = FileSystem.get(conf);
             Path path = new Path("/tmp/test/datafile.txt");
-            FSDataInputStream outputStream = fs.open(path);
+            FSDataOutputStream outputStream = fs.create(path);
             for (int i = 0; i < 100; i++) {
                 for (int bs = 0; bs < 1024 * 1024; bs++) {
-                    outputStream.wr
+                    outputStream.write("testdata".getBytes());
                 }
             }
             outputStream.close();
