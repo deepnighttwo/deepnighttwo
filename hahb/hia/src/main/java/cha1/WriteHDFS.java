@@ -6,6 +6,9 @@ import org.apache.hadoop.fs.FSDataOutputStream;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 
+import java.io.IOException;
+import java.util.Random;
+
 
 /**
  * User: mzang
@@ -15,8 +18,9 @@ import org.apache.hadoop.fs.Path;
 public class WriteHDFS {
 
     public static void main(String[] args) {
-        createAndWrite();
-        appendData();
+//        createAndWrite();
+//        appendData();
+        createTestData(1000, 100);
     }
 
     static void appendData() {
@@ -56,6 +60,43 @@ public class WriteHDFS {
 //                }
             }
             outputStream.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    static void createTestData(final int fileCount, final int lineCount) {
+        try {
+            Configuration conf = new Configuration();
+            conf.addResource("hdfs-site.xml");
+            final FileSystem fs = FileSystem.get(conf);
+
+            for (int i = 0; i < fileCount; i++) {
+                final Path path = new Path("/tmp/test/input/cc" + i + ".txt");
+                new Thread() {
+                    public void run() {
+                        try {
+                            Random random = new Random();
+                            int lineSize = 10;
+                            byte[] content = new byte[lineSize + 1];
+
+                            FSDataOutputStream fsos = fs.create(path, true);
+
+                            for (int j = 0; j < lineCount; j++) {
+                                for (int k = 0; k < lineSize; k++) {
+                                    content[k] = (byte) ('A' + (random.nextDouble() * 26));
+                                }
+                                content[lineSize] = '\n';
+                                fsos.write(content);
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                }.start();
+
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }

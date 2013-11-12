@@ -1,0 +1,1 @@
+create 'clog.test', {NAME => 'data', DATA_BLOCK_ENCODING => 'FAST_DIFF', BLOOMFILTER => 'ROWCOL', VERSIONS => '1',TTL => '604800', COMPRESSION => 'SNAPPY'}
