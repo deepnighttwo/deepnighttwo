@@ -17,6 +17,16 @@ import java.util.Random;
  */
 public class WriteHDFS {
 
+    /**
+     * hadoop 客户端与集群连接的配置文件。无论和集群怎么互动，都要先加载这个配置。不同的集群配置不同。
+     */
+    static Configuration conf;
+
+    static {
+        Configuration conf = new Configuration();
+        conf.addResource("hdfs-site.xml");
+    }
+
     public static void main(String[] args) {
 //        createAndWrite();
 //        appendData();
@@ -25,8 +35,6 @@ public class WriteHDFS {
 
     static void appendData() {
         try {
-            Configuration conf = new Configuration();
-            conf.addResource("hdfs-site.xml");
             FileSystem fs = FileSystem.get(conf);
             Path path = new Path("/tmp/test/datafile.txt");
             FSDataOutputStream outputStream = fs.append(path);
@@ -46,8 +54,6 @@ public class WriteHDFS {
 
     static void createAndWrite() {
         try {
-            Configuration conf = new Configuration();
-            conf.addResource("hdfs-site.xml");
             FileSystem fs = FileSystem.get(conf);
             Path path = new Path("/tmp/test/datafile.txt");
             FSDataOutputStream outputStream = fs.create(path);
@@ -67,8 +73,6 @@ public class WriteHDFS {
 
     static void createTestData(final int fileCount, final int lineCount) {
         try {
-            Configuration conf = new Configuration();
-            conf.addResource("hdfs-site.xml");
             final FileSystem fs = FileSystem.get(conf);
 
             for (int i = 0; i < fileCount; i++) {
