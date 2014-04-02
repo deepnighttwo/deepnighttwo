@@ -2,7 +2,6 @@ package com.deepnighttwo;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.MarkerFactory;
 
 /**
  * User: mzang
@@ -20,6 +19,6 @@ public class SLF4JWithLog4j1WriteLog {
     }
 
     public void writeLog() {
-        logger.info(MarkerFactory.getMarker("ffffffffff"), "This is Log.");
+        logger.info("This is Log.");
     }
 }
