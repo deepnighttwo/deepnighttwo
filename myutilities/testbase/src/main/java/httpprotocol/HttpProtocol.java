@@ -20,7 +20,7 @@ public class HttpProtocol {
 			IOException {
 		List<String[]> httpParams = new ArrayList<String[]>();
 
-		httpParams.add(new String[] { "Host", "www.google.com.hk" });
+		httpParams.add(new String[] { "Host", "deepnighttwo.com" });
 		httpParams.add(new String[] { "User-Agent", "DeepNightTwo" });
 		httpParams.add(new String[] { "Accept", "text/html" });
 		httpParams.add(new String[] { "Accept-Language", "en-us,en;q=0.5" });
@@ -28,7 +28,7 @@ public class HttpProtocol {
 		httpParams.add(new String[] { "Accept-Charset",
 				"ISO-8859-1,utf-8;q=0.7,*;q=0.7" });
 		httpParams.add(new String[] { "Connection", "keep-alive" });
-		callHttpGet("www.google.com.hk", 80, "/", httpParams);
+		callHttpGet("deepnighttwo.com", 80, "/", httpParams);
 	}
 
 	public static void callHttpGet(String host, int port, String path,
@@ -45,7 +45,7 @@ public class HttpProtocol {
 		os.write(request.toString().getBytes());
 		os.flush();
 		BufferedReader br = new BufferedReader(new InputStreamReader(
-				socket.getInputStream(), "Big5"));
+				socket.getInputStream(), "utf-8"));
 		String line = null;
 		while ((line = br.readLine()) != null) {
 			System.out.println(line + "\r\n");
