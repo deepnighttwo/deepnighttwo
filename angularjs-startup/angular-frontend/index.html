@@ -1,0 +1,60 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+    <script src="js/angular.min.js"></script>
+    <script src="js/main.js"></script>
+</head>
+<body>
+
+<div ng-controller="mycontroller">
+    <input type="text" ng-model="yourName" placeholder="enter your name">
+
+    <h1>hello {{ yourName }}</h1>
+
+    <h1>hello {{ name }}</h1>
+
+    <h1>hello {{ person.name}} </h1>
+</div>
+
+
+<div ng-controller="pc">
+
+    <div ng-controller="cc">
+        <input type="text" ng-model="person.prop" placeholder="enter your name">
+        <b> {{person.prop}} </b>
+    </div>
+
+</div>
+
+<br>
+<br>
+<br>
+
+<!--<div ng-controller="PlayController">-->
+<!--<button ng-click="play()" class="button" ng-show="!playing">Play</button>-->
+<!--<button ng-click="stop()" class="button" ng-show="playing">Stop</button>-->
+<!--Playing audio: <b> {{playing}} </b>-->
+<!--</div>-->
+
+<div ng-controller="PersonList">
+    <button ng-click="load()" class="button" ng-show="true">load data</button>
+
+    <table border="1">
+        <tr>
+            <th>name</th>
+            <th>phone number</th>
+        </tr>
+        <tr ng-repeat="p in data">
+            <td>
+                {{p.name}}
+            </td>
+            <td>
+                {{p.phoneNumber}}
+            </td>
+        </tr>
+    </table>
+
+</div>
+
+</body>
+</html>
