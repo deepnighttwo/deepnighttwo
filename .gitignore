@@ -63,3 +63,4 @@ logs/
 *.log
 collectortestdatadir/
 testimagegenbasedir/
+etl.pl
