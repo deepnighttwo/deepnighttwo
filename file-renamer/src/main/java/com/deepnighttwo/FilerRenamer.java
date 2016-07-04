@@ -29,8 +29,7 @@ public class FilerRenamer {
         System.out.println(ext);
 //        renameFiles("C:\\Users\\Mark Zang\\Desktop\\宝宝手机\\备份\\2016年7月4日");
         renameAndCopyFiles("C:\\Users\\Mark Zang\\Desktop\\宝宝手机\\所有照片视频",
-                "C:\\Users\\Mark Zang\\Desktop\\宝宝手机\\备份 - 副本\\2016年6月5日",
-                "C:\\Users\\Mark Zang\\Desktop\\宝宝手机\\备份 - 副本\\2016年7月4日");
+                "C:\\Users\\Mark Zang\\Desktop\\iphone pic\\ip");
     }
 
     public static void renameFiles(String targetDir) throws IOException {

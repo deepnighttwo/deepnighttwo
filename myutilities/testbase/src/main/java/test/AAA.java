@@ -8,6 +8,10 @@ import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+<<<<<<< HEAD
+=======
+import java.util.Date;
+>>>>>>> 72ff47106c94f8f51f9c8365d5aa5cd06f47d2bd
 import java.util.List;
 import java.util.TimeZone;
 
@@ -32,6 +36,12 @@ public class AAA {
 	 */
 	public static void main(String[] args) throws Exception {
 
+<<<<<<< HEAD
+=======
+        Date date = new Date(1406696963924l);
+        System.out.println(date);
+
+>>>>>>> 72ff47106c94f8f51f9c8365d5aa5cd06f47d2bd
 		DecimalFormat df = new DecimalFormat("ABCDE00000");
 		System.out.println(df.format(45));
 

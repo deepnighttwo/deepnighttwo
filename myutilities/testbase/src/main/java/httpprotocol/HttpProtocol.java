@@ -20,7 +20,11 @@ public class HttpProtocol {
 			IOException {
 		List<String[]> httpParams = new ArrayList<String[]>();
 
+<<<<<<< HEAD
 		httpParams.add(new String[] { "Host", "www.google.com.hk" });
+=======
+		httpParams.add(new String[] { "Host", "deepnighttwo.com" });
+>>>>>>> 72ff47106c94f8f51f9c8365d5aa5cd06f47d2bd
 		httpParams.add(new String[] { "User-Agent", "DeepNightTwo" });
 		httpParams.add(new String[] { "Accept", "text/html" });
 		httpParams.add(new String[] { "Accept-Language", "en-us,en;q=0.5" });
@@ -28,7 +32,11 @@ public class HttpProtocol {
 		httpParams.add(new String[] { "Accept-Charset",
 				"ISO-8859-1,utf-8;q=0.7,*;q=0.7" });
 		httpParams.add(new String[] { "Connection", "keep-alive" });
+<<<<<<< HEAD
 		callHttpGet("www.google.com.hk", 80, "/", httpParams);
+=======
+		callHttpGet("deepnighttwo.com", 80, "/", httpParams);
+>>>>>>> 72ff47106c94f8f51f9c8365d5aa5cd06f47d2bd
 	}
 
 	public static void callHttpGet(String host, int port, String path,
@@ -45,7 +53,11 @@ public class HttpProtocol {
 		os.write(request.toString().getBytes());
 		os.flush();
 		BufferedReader br = new BufferedReader(new InputStreamReader(
+<<<<<<< HEAD
 				socket.getInputStream(), "Big5"));
+=======
+				socket.getInputStream(), "utf-8"));
+>>>>>>> 72ff47106c94f8f51f9c8365d5aa5cd06f47d2bd
 		String line = null;
 		while ((line = br.readLine()) != null) {
 			System.out.println(line + "\r\n");

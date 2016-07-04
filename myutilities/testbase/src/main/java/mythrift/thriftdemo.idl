@@ -1,0 +1,32 @@
+
+// thrift.exe --gen java -o  D:\mymise\deepnighttwo\myutilities\testbase\src\main  D:\mymise\deepnighttwo\myutilities\testbase\src\main\java\mythrift\thriftde
+namespace java mythrift
+
+
+enum DataType {
+LOG = 0,
+DATA = 1,
+FILE = 2
+}
+
+struct ProcessResult {
+1: i64 id;
+2: bool success;
+3: string message;
+}
+
+
+struct DataPackage {
+1: i64 id;
+2: string name;
+3: DataType type;
+4: i32 version;
+5: i64 timestamp;
+6: set<string> keywords;
+7: list<string> words;
+8: map<string, string> props;
+}
+
+service ProcessDataService {
+ProcessResult processData(1:DataPackage dataPackage);
+}

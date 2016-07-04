@@ -1,0 +1,260 @@
+package topasin;
+
+import java.io.File;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+import javax.xml.crypto.dsig.Transform;
+
+import topasin.calculate.AsinDetailAnalysisFields;
+import topasin.calculate.TopAsinExtractorFlow;
+import topasin.calculate.TopAsinsCalculator;
+import topasin.compare.AsinComparableFactory;
+import topasin.describer.AsinDescriberFactory;
+import topasin.filter.AsinDetailFilterFactory;
+import topasin.util.AsinDetail;
+import topasin.util.LocalFileTopAsinContext;
+import topasin.util.TopAsinContext;
+import topasin.util.TopAsinMapFactory;
+import topasin.util.TopAsinUtil;
+
+/**
+ * get top asin from metrics calculation result files
+ * 
+ * @author mengzang
+ * 
+ */
+public class TopAsinFileBasedTransform implements Transform {
+
+    @Override
+    public String getTransformName() {
+        return MetricsConstants.TOP_ASIN_BY_IOG_GL;
+    }
+
+    TopAsinExtractorFlow analyst;
+
+    public TopAsinFileBasedTransform(String root, Date startDate, Date endDate) {
+        try {
+            LocalFileTopAsinContext context = createTopAsinContext(root, startDate, endDate);
+            if (context == null) {
+                new RuntimeException("Analysis Top Asin transform failed due to confg & env issue. "
+                        + "Please check error log for more details");
+            }
+            log("Running top asin analyst with context:" + context);
+            analyst = new TopAsinExtractorFlow(context);
+            // ReaderFilePerfTest t = new ReaderFilePerfTest(context);
+            // t.perfTest();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private LocalFileTopAsinContext createTopAsinContext(String root, Date startDate, Date endDate) {
+        String otherOpt = MetricsContext.getSettingValue(MetricsConstants.OTHER_OPTION);
+        String[] options = otherOpt.split(",");
+        if (options.length < 4) {
+            log("Value of '--other-option' in command parameter is invalid. "
+                    + "It should provide orig asindetails file and new asindetails file configs separated by comma at least.");
+            log(getHelpMessage());
+            return null;
+        }
+
+        for (int i = 0; i < options.length; i++) {
+            options[i] = options[i].trim();
+        }
+
+        int origFileIndex = 0;
+        int origFileSkipLineIndex = 1;
+        int newFileIndex = 2;
+        int newFileSkipLineIndex = 3;
+        int topAsinCountIndex = 4;
+
+        String origFile = getFilePath(options[origFileIndex]);
+
+        int origFileSkipLine = TopAsinUtil.getInt(options[origFileSkipLineIndex], 1);
+        String newFile = getFilePath(options[newFileIndex]);
+        int newFileSkipLine = TopAsinUtil.getInt(options[newFileSkipLineIndex], 1);
+
+        int topDiffCount = TopAsinUtil.getInt(options[topAsinCountIndex], 10);
+
+        String transformName = getTransformName();
+        String output = FilenameUtils.getTransformDataFile(transformName, root, startDate, endDate);
+        String error = FilenameUtils.getTransformErrorFile(transformName, root, startDate, endDate);
+
+        LocalFileTopAsinContext context = new LocalFileTopAsinContext(output, error, origFile, origFileSkipLine,
+                newFile, newFileSkipLine);
+        context.addRTOption(TopAsinContext.TOP_ASIN_COUNT, topDiffCount);
+
+        Config config = ConfigFactory.getDefaultConfig();
+
+        // configurations from config file
+        // compare related
+        context.addRTOption(TopAsinContext.COMPARATOR_NAME,
+                config.findString("TopAsinFileBasedTransformer.Comparator.Name"));
+        context.addRTOption(TopAsinContext.ASIN_COMPARE_FIELD_NAME,
+                config.findList("TopAsinFileBasedTransformer.Comparator.CompareFieldNames").toArray(new String[0]));
+        context.addRTOption(TopAsinContext.TOP_ASIN_SELECTION_OPTION,
+                config.findMap("TopAsinFileBasedTransformer.Comparator.TopAsinSelectionOption"));
+
+        // group related
+        context.addRTOption(TopAsinContext.ASIN_GROUP_FIELD_NAMES,
+                config.findList("TopAsinFileBasedTransformer.GroupByFieldNames").toArray(new String[0]));
+        context.addRTOption(TopAsinContext.GROUP2ASIN_COUNT_BIN_FILE_NAME,
+                FilenameUtils.getOutputFilename(TopAsinContext.GROUP2ASIN_COUNT_BIN_FILE_NAME + ".bin"));
+
+        // thread number related
+        context.addRTOption(TopAsinContext.BUILD_TREE_THREAD_NUMBER,
+                config.findInteger("TopAsinFileBasedTransformer.Transform.TreeBuilderThreadNumber", 1));
+        context.addRTOption(TopAsinContext.ANALYSIS_FILE_THREAD_NUMBER,
+                config.findInteger("TopAsinFileBasedTransformer.Transform.AnalysisFileThreadNumber", 1));
+        context.addRTOption(TopAsinContext.OUTPUT_THREAD_NUMBER,
+                config.findInteger("TopAsinFileBasedTransformer.Transform.OutputThreadNumber", 1));
+
+        // describer related
+        context.addRTOption(TopAsinContext.DESCRIBER_NAMES,
+                config.findList("TopAsinFileBasedTransformer.Describer.Names"));
+        context.addRTOption(TopAsinContext.DESCRIBER_KEY_FIELD_NAMES,
+                config.findList("TopAsinFileBasedTransformer.Describer.KeyFields"));
+
+        // filter related
+        context.addRTOption(TopAsinContext.FILTER_NAME, config.findString("TopAsinFileBasedTransformer.Filter.Name"));
+
+        context.addRTOption(TopAsinContext.FILTER_SETTING, config.findMap("TopAsinFileBasedTransformer.Filter.Setting"));
+
+        // log
+        context.addRTOption(TopAsinContext.LOG_INTERVAL,
+                config.findInteger("TopAsinFileBasedTransformer.Log.Interval", 5));
+
+        initSystem(context.getRTOptions());
+
+        boolean verified = context.verifyParameters();
+        if (verified == false) {
+            throw new IllegalArgumentException(TopAsinUtil.CONTEXT_VERIFY_FAILLED_ERR);
+        }
+        return context;
+    }
+
+    public boolean initSystem(Map<String, Object> rtOptions) {
+
+        TopAsinsCalculator.init(rtOptions);
+
+        AsinDetail.init(rtOptions);
+
+        AsinDetailAnalysisFields.init(rtOptions);
+
+        AsinComparableFactory.init(rtOptions);
+
+        AsinDescriberFactory.init(rtOptions);
+
+        AsinDetailFilterFactory.init(rtOptions);
+
+        TopAsinMapFactory.init(rtOptions);
+
+        return true;
+    }
+
+    /**
+     * this method does two things 1) if file path start with File.separatorChar( e.g. "/" on linux), it is used as
+     * relative path under CDO. 2) if the file doesn't exits, it will check if the .gz and .zip exists, if so it will
+     * add the postfix.
+     * 
+     * @param filePath
+     * @return
+     */
+    private static String getFilePath(String filePath) {
+        if (filePath.charAt(0) != File.separatorChar) {
+            Config config = ConfigFactory.getDefaultConfig();
+            String location = config.findString("IhrMetrics.Output.Location");
+            if (location.charAt(location.length() - 1) != File.separatorChar) {
+                location = location + File.separatorChar;
+            }
+            filePath = location + filePath;
+        }
+
+        String[] supportedCompressedTypePostfix = new String[] {
+                ".gz", ".zip"
+        };
+        File checkExisting = new File(filePath);
+        if (checkExisting.isFile() == false) {
+            for (String postFix : supportedCompressedTypePostfix) {
+                checkExisting = new File(filePath + postFix);
+                if (checkExisting.isFile() == true) {
+                    return filePath + postFix;
+                }
+                checkExisting = new File(filePath + postFix.toUpperCase());
+                if (checkExisting.isFile() == true) {
+                    return filePath + postFix;
+                }
+            }
+        }
+
+        return filePath;
+    }
+
+    private static String getHelpMessage() {
+        String lb = System.getProperty("line.separator");
+        StringBuilder message = new StringBuilder();
+        message.append("Details about parameter '--other-option' for this transform:" + lb);
+        message.append("It contains 5 parameters separated by comma: ORIG_ASINDETAIL_FILE,LINE2SKIP_ORIG,NEW_ASINDETAIL_FILE,LINE2SKIP_NEW,TOP_ASIN_COUNT."
+                + "Only TOP_ASIN_COUNT is optional. And the default value is 10." + lb);
+        message.append("If file path start with '" + File.separator
+                + "', then it is used as absolute path. Otherwise it will append cdo to the value as file path." + lb);
+        message.append("If file path start with '" + File.separator
+                + "', then it is used as absolute path. Otherwise it will append cdo to the value as file path." + lb);
+        message.append("Examples:");
+        message.append("--other-option /local/tmp/a.txt,1,/local/tmp/b.txt,1,10" + lb);
+        message.append("--other-option /local/tmp/a.txt,1,/local/tmp/b.txt,1" + lb);
+        message.append("--other-option " + File.separator + "local" + File.separator + "tmp" + File.separator
+                + "a.txt,1,b.txt,1,10" + lb);
+
+        return message.toString();
+    }
+
+    @Override
+    public void doTransform() throws IOException, SQLException {
+        try {
+            analyst.doAnalysis();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void log(Object obj) {
+        System.out.println(obj);
+    }
+
+    /**
+     *********************************************************************** 
+     ******** Following methods are not used by this transformer************
+     *********************************************************************** 
+     */
+
+    @Override
+    public com.amazon.dw.validation.Validator getValidator() {
+        return null;
+    }
+
+    @Override
+    public List<String> getColumnNames() {
+        return null;
+    }
+
+    @Override
+    public boolean next() throws SQLException {
+        return false;
+    }
+
+    @Override
+    public boolean previous() throws SQLException {
+        return false;
+    }
+
+    @Override
+    public String getString(int columnPosition) throws SQLException {
+        return null;
+    }
+
+}
