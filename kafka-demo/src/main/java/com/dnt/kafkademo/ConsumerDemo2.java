@@ -39,13 +39,13 @@ public class ConsumerDemo2 {
         final kafka.javaapi.consumer.ConsumerConnector connector = Consumer.createJavaConsumerConnector(consumerConfig);
 
         Map<String, Integer> topics = new HashMap<String, Integer>();
-        topics.put("topic1", 3);
+        topics.put("risklogging.idimodellogdatavo", 1);
 
         Map<String, List<KafkaStream<byte[], byte[]>>> streams = connector.createMessageStreams(topics);
 
         List<KafkaStream<byte[], byte[]>> partitions = streams.get("topic1");
 
-        threadPool = Executors.newFixedThreadPool(2);
+        threadPool = Executors.newFixedThreadPool(9);
 
         for (KafkaStream<byte[], byte[]> stream : partitions) {
             final KafkaStream inner = stream;

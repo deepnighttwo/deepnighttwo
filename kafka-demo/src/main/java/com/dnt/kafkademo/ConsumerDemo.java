@@ -23,10 +23,10 @@ public class ConsumerDemo {
         Properties props = new Properties();
         props.load(ConsumerDemo.class.getClassLoader().getResourceAsStream("consumer.properties"));
         consumer = new KafkaConsumer<String, String>(props);
-        TopicPartition partition0 = new TopicPartition("topic1", 0);
-        TopicPartition partition1 = new TopicPartition("topic1", 1);
-        TopicPartition partition2 = new TopicPartition("topic1", 2);
-        consumer.subscribe(partition0, partition1, partition2);
+        TopicPartition partition0 = new TopicPartition("risklogging.idimodellogdatavo", 0);
+        TopicPartition partition1 = new TopicPartition("risklogging.idimodellogdatavo", 1);
+        TopicPartition partition2 = new TopicPartition("risklogging.idimodellogdatavo", 2);
+        consumer.subscribe(partition0);//partition1, partition2
     }
 
     public ConsumerDemo() throws IOException {

@@ -32,14 +32,14 @@ public class ProducerDemo {
         ProducerRecord<String, String> record =
                 new ProducerRecord<String, String>(topic, message);
         Future<RecordMetadata> future = producer.send(record);
-//        try {
-//            RecordMetadata metadata = future.get();
-//            System.out.println(metadata);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        } catch (ExecutionException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            RecordMetadata metadata = future.get();
+            System.out.println(metadata);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
     }
 
     public void close() {
@@ -48,8 +48,8 @@ public class ProducerDemo {
 
     public static void main(String[] args) throws IOException {
         ProducerDemo producerDemo = new ProducerDemo();
-        for (int i = 0; i < 1000000; i++) {
-            producerDemo.sendMessage("topic1", "message " + i);
+        for (int i = 0; i < 10; i++) {
+            producerDemo.sendMessage("risklogging.idimodellogdatavo", "message " + i);
             System.out.println("sent " + i);
             try {
                 Thread.sleep(1);
