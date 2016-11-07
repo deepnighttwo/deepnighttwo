@@ -30,8 +30,8 @@ public class FilerRenamer {
 //        System.out.println(sdfDate.format(date));
 //        String ext = Files.getFileExtension(f.toString());
 //        System.out.println(ext);
-        String target = "C:\\Users\\Mark Zang\\Desktop\\宝宝手机\\所有照片视频";
-        String source = "C:\\Users\\Mark Zang\\Desktop\\相机\\aaa";
+        String target = "C:\\Users\\Mark Zang\\Desktop\\target";
+        String source = "C:\\Users\\Mark Zang\\Desktop\\新照片";
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         while (true) {
             System.out.println("目标目录：" + target + "。包含文件数目：" +getFileCount(target));
