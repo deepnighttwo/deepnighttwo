@@ -30,11 +30,59 @@ public class FilerRenamer {
 //        System.out.println(sdfDate.format(date));
 //        String ext = Files.getFileExtension(f.toString());
 //        System.out.println(ext);
+        if (args == null || args.length == 0) {
+            copyAndRename();
+        } else {
+            renameBasedOnExif(args[0]);
+        }
+    }
+
+    static void renameBasedOnExif(String targetDir) throws IOException {
+        File target = new File(targetDir);
+
+        for (File file : target.listFiles()) {
+            String ext = Files.getFileExtension(file.toString());
+            if ((ext.toUpperCase().equals("JPEG") || ext.equalsIgnoreCase("JPG")) == false) {
+                continue;
+            }
+            Date date = ExifUtils.getDateFromFile(file);
+            File newFile = new File(target, sdfDate.format(date) + "." + ext);
+            if (newFile.isFile()) {
+                System.out.println("same modify time file found:" + file);
+                if (file.length() == newFile.length()) {
+                    System.out.println("file size the same. comparing hash");
+                    HashCode hashNew = Files.asByteSource(newFile).hash(Hashing.sha1());
+                    HashCode hashOrigin = Files.asByteSource(file).hash(Hashing.sha1());
+                    System.out.println("Origin hash=" + hashOrigin + ", New hash=" + hashNew);
+                    if (hashNew.equals(hashOrigin)) {
+                        System.out.println("file hash same, skipping");
+                        continue;
+                    } else {
+                        while (newFile.isFile() == true) {
+                            System.out.println("hash not the same, using a new name");
+                            newFile = new File(target, sdfDate.format(date) + "-" + (int) (Math.random() * 100000) + "." + ext);
+                        }
+                    }
+                } else {
+                    while (newFile.isFile() == true) {
+                        System.out.println("file size not the same. rename the new file");
+                        newFile = new File(target, sdfDate.format(date) + "-" + (int) (Math.random() * 100000) + "." + ext);
+                    }
+                }
+            }
+
+//            HashCode hash = Files.asByteSource(file).hash(Hashing.sha1());
+            Files.move(file, newFile);
+
+        }
+    }
+
+    static void copyAndRename() throws IOException {
         String target = "C:\\Users\\Mark Zang\\Desktop\\target";
         String source = "C:\\Users\\Mark Zang\\Desktop\\新照片";
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         while (true) {
-            System.out.println("目标目录：" + target + "。包含文件数目：" +getFileCount(target));
+            System.out.println("目标目录：" + target + "。包含文件数目：" + getFileCount(target));
             System.out.println("源目录：" + source + "。包含文件数目：" + getFileCount(source));
 
             System.out.println("目标目录：" + target);
@@ -49,21 +97,21 @@ public class FilerRenamer {
             if (StringUtils.isNotBlank(line)) {
                 source = line;
             }
-            System.out.println("目标目录：" + target + "。包含文件数目：" +getFileCount(target));
+            System.out.println("目标目录：" + target + "。包含文件数目：" + getFileCount(target));
             System.out.println("源目录：" + source + "。包含文件数目：" + getFileCount(source));
             System.out.println("单击Enter确定。其它键重新输入……");
             line = br.readLine().trim();
             if (StringUtils.isBlank(line)) {
                 System.out.println("开始文件拷贝和重命名，再次确认信息：");
-                System.out.println("目标目录：" + target + "。包含文件数目：" +getFileCount(target));
+                System.out.println("目标目录：" + target + "。包含文件数目：" + getFileCount(target));
                 System.out.println("源目录：" + source + "。包含文件数目：" + getFileCount(source));
                 System.out.println("单击Enter确定。其它键重新输入……");
                 line = br.readLine().trim();
                 if (StringUtils.isBlank(line)) {
                     renameAndCopyFiles(target, source);
                     break;
-                }else {
-                        continue;
+                } else {
+                    continue;
                 }
             }
         }
@@ -99,12 +147,16 @@ public class FilerRenamer {
                             System.out.println("file hash same, skipping");
                             continue;
                         } else {
-                            System.out.println("hash not the same, using a new name");
-                            newFile = new File(target, sdfDate.format(date) + "-" + (int) (Math.random() * 100000) + "." + ext);
+                            while (newFile.isFile() == false) {
+                                System.out.println("hash not the same, using a new name");
+                                newFile = new File(target, sdfDate.format(date) + "-" + (int) (Math.random() * 100000) + "." + ext);
+                            }
                         }
                     } else {
-                        System.out.println("file size not the same. rename the new file");
-                        newFile = new File(target, sdfDate.format(date) + "-" + (int) (Math.random() * 100000) + "." + ext);
+                        while (newFile.isFile() == true) {
+                            System.out.println("file size not the same. rename the new file");
+                            newFile = new File(target, sdfDate.format(date) + "-" + (int) (Math.random() * 100000) + "." + ext);
+                        }
                     }
                 }
 
