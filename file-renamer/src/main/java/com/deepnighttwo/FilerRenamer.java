@@ -3,9 +3,12 @@ package com.deepnighttwo;
 import com.google.common.hash.HashCode;
 import com.google.common.hash.Hashing;
 import com.google.common.io.Files;
+import org.apache.commons.lang3.StringUtils;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -19,32 +22,60 @@ public class FilerRenamer {
     static SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy年MM月dd日HH点mm分ss秒");
 
     public static void main(String[] args) throws IOException {
-        File f = new File("C:\\Users\\Mark Zang\\Desktop\\宝宝手机\\备份\\2016年7月4日", "IMG_1717.JPG");
-        System.out.println(f.exists());
-        System.out.println(f.isFile());
-        Date date = new Date(f.lastModified());
-        System.out.println(f.lastModified());
-        System.out.println(sdfDate.format(date));
-        String ext = Files.getFileExtension(f.toString());
-        System.out.println(ext);
-//        renameFiles("C:\\Users\\Mark Zang\\Desktop\\宝宝手机\\备份\\2016年7月4日");
-        renameAndCopyFiles("C:\\Users\\Mark Zang\\Desktop\\宝宝手机\\所有照片视频",
-                "C:\\Users\\Mark Zang\\Desktop\\iphone pic\\ip");
-    }
+//        File f = new File("C:\\Users\\Mark Zang\\Desktop\\宝宝手机\\备份\\2016年7月4日", "IMG_1717.JPG");
+//        System.out.println(f.exists());
+//        System.out.println(f.isFile());
+//        Date date = new Date(f.lastModified());
+//        System.out.println(f.lastModified());
+//        System.out.println(sdfDate.format(date));
+//        String ext = Files.getFileExtension(f.toString());
+//        System.out.println(ext);
+        String target = "C:\\Users\\Mark Zang\\Desktop\\宝宝手机\\所有照片视频";
+        String source = "C:\\Users\\Mark Zang\\Desktop\\相机\\aaa";
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        while (true) {
+            System.out.println("目标目录：" + target + "。包含文件数目：" +getFileCount(target));
+            System.out.println("源目录：" + source + "。包含文件数目：" + getFileCount(source));
 
-    public static void renameFiles(String targetDir) throws IOException {
-        File dir = new File(targetDir);
-        for (File file : dir.listFiles()) {
-            Date date = new Date(file.lastModified());
-            String ext = Files.getFileExtension(file.toString());
-            File newFile = new File(dir, sdfDate.format(date) + "." + ext);
-
-//            HashCode hash = Files.asByteSource(file).hash(Hashing.sha1());
-            Files.move(file, newFile);
+            System.out.println("目标目录：" + target);
+            System.out.println("更改为：");
+            String line = br.readLine().trim();
+            if (StringUtils.isNotBlank(line)) {
+                target = line;
+            }
+            System.out.println("源目录：" + source);
+            System.out.println("更改为：");
+            line = br.readLine().trim();
+            if (StringUtils.isNotBlank(line)) {
+                source = line;
+            }
+            System.out.println("目标目录：" + target + "。包含文件数目：" +getFileCount(target));
+            System.out.println("源目录：" + source + "。包含文件数目：" + getFileCount(source));
+            System.out.println("单击Enter确定。其它键重新输入……");
+            line = br.readLine().trim();
+            if (StringUtils.isBlank(line)) {
+                System.out.println("开始文件拷贝和重命名，再次确认信息：");
+                System.out.println("目标目录：" + target + "。包含文件数目：" +getFileCount(target));
+                System.out.println("源目录：" + source + "。包含文件数目：" + getFileCount(source));
+                System.out.println("单击Enter确定。其它键重新输入……");
+                line = br.readLine().trim();
+                if (StringUtils.isBlank(line)) {
+                    renameAndCopyFiles(target, source);
+                    break;
+                }else {
+                        continue;
+                }
+            }
         }
-
     }
 
+    static int getFileCount(String dir) {
+        try {
+            return (new File(dir)).list().length;
+        } catch (Exception ex) {
+            return -1;
+        }
+    }
 
     public static void renameAndCopyFiles(String targetDir, String... sourceTarget) throws IOException {
         File target = new File(targetDir);
