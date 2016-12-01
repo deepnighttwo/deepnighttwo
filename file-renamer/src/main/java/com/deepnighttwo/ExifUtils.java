@@ -19,8 +19,10 @@ public class ExifUtils {
 
     static SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy:MM:dd HH:mm:ss");
 
+
     public static void main(String[] args) {
-        getDateFromFile(new File("C:\\Users\\Mark Zang\\Desktop\\贝贝\\2016年06月04日10点09分08秒.JPG"));
+        Date date = getDateFromFile(new File("test.JPG"));
+        System.out.println("aaaaa:" + date);
     }
 
     public static Date getDateFromFile(File file) {

@@ -21,6 +21,7 @@ public class FilerRenamer {
 
     static SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy年MM月dd日HH点mm分ss秒");
 
+
     public static void main(String[] args) throws IOException {
 //        File f = new File("C:\\Users\\Mark Zang\\Desktop\\宝宝手机\\备份\\2016年7月4日", "IMG_1717.JPG");
 //        System.out.println(f.exists());
@@ -79,7 +80,7 @@ public class FilerRenamer {
 
     static void copyAndRename() throws IOException {
         String target = "C:\\Users\\Mark Zang\\Desktop\\target";
-        String source = "C:\\Users\\Mark Zang\\Desktop\\新照片";
+        String source = "C:\\Users\\Mark Zang\\Desktop\\new";
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         while (true) {
             System.out.println("目标目录：" + target + "。包含文件数目：" + getFileCount(target));
@@ -133,7 +134,7 @@ public class FilerRenamer {
         for (String src : sourceTarget) {
             File dir = new File(src);
             for (File file : dir.listFiles()) {
-                Date date = new Date(file.lastModified());
+                Date date = ExifUtils.getDateFromFile(file);
                 String ext = Files.getFileExtension(file.toString());
                 File newFile = new File(target, sdfDate.format(date) + "." + ext);
                 if (newFile.isFile()) {
